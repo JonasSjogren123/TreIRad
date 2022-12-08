@@ -17,19 +17,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AfB-Ij-kfz">
-                                <rect key="frame" x="110" y="278" width="70.5" height="100"/>
+                                <rect key="frame" x="151.5" y="278" width="111" height="100"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <connections>
-                                    <action selector="buttonR0C1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="092-Qy-62e"/>
+                                    <action selector="gameButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="092-Qy-62e"/>
                                 </connections>
                             </button>
                             <button tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uK-jf-WjG">
-                                <rect key="frame" x="205.5" y="278" width="70" height="100"/>
+                                <rect key="frame" x="287.5" y="278" width="111.5" height="100"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <connections>
-                                    <action selector="buttonR0C1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LPt-wK-z4A"/>
+                                    <action selector="gameButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LPt-wK-z4A"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VpR-ow-aVl">
@@ -37,11 +37,11 @@
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <connections>
-                                    <action selector="buttonR0C1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TCc-MF-tlZ"/>
+                                    <action selector="gameButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TCc-MF-tlZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUa-1P-Xvd">
-                                <rect key="frame" x="110" y="403" width="70.5" height="100"/>
+                                <rect key="frame" x="151.5" y="403" width="111" height="100"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="J07-a8-FuA"/>
@@ -49,47 +49,47 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <connections>
-                                    <action selector="buttonR0C1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cvo-5l-udv"/>
+                                    <action selector="gameButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cvo-5l-udv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXq-vh-o9V">
-                                <rect key="frame" x="205.5" y="403" width="70" height="100"/>
+                                <rect key="frame" x="287.5" y="403" width="111.5" height="100"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <connections>
-                                    <action selector="buttonR0C1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QB9-zY-a25"/>
+                                    <action selector="gameButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QB9-zY-a25"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcj-dU-Nu0">
-                                <rect key="frame" x="15" y="403" width="70" height="100"/>
+                                <rect key="frame" x="15" y="403" width="111.5" height="100"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <connections>
-                                    <action selector="buttonR0C1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ksn-cv-u25"/>
+                                    <action selector="gameButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ksn-cv-u25"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaJ-HV-0Br">
-                                <rect key="frame" x="110" y="528" width="70.5" height="100"/>
+                                <rect key="frame" x="151.5" y="528" width="111" height="100"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <connections>
-                                    <action selector="buttonR0C1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SrM-PY-LNe"/>
+                                    <action selector="gameButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SrM-PY-LNe"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1J-sy-oDz">
-                                <rect key="frame" x="205.5" y="528" width="70" height="100"/>
+                                <rect key="frame" x="287.5" y="528" width="111.5" height="100"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <connections>
-                                    <action selector="buttonR0C1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hhV-GT-e1N"/>
+                                    <action selector="gameButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hhV-GT-e1N"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28y-d3-A5b">
-                                <rect key="frame" x="15" y="528" width="70" height="100"/>
+                                <rect key="frame" x="15" y="528" width="111.5" height="100"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <connections>
-                                    <action selector="buttonR0C1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AOV-ac-rCh"/>
+                                    <action selector="gameButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AOV-ac-rCh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -140,15 +140,15 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="viewR0C0" destination="VpR-ow-aVl" id="1Vz-fP-d0l"/>
-                        <outlet property="viewR0C1" destination="AfB-Ij-kfz" id="dAf-TJ-pUS"/>
-                        <outlet property="viewR0C2" destination="3uK-jf-WjG" id="v29-KB-Psa"/>
-                        <outlet property="viewR1C0" destination="pcj-dU-Nu0" id="8cl-a2-dec"/>
-                        <outlet property="viewR1C1" destination="pUa-1P-Xvd" id="ePp-8t-OMc"/>
-                        <outlet property="viewR1C2" destination="yXq-vh-o9V" id="hGY-id-DGQ"/>
-                        <outlet property="viewR2C0" destination="28y-d3-A5b" id="B4u-br-y9k"/>
-                        <outlet property="viewR2C1" destination="eaJ-HV-0Br" id="JMT-18-Clz"/>
-                        <outlet property="viewR2C2" destination="m1J-sy-oDz" id="uBS-Pv-Tvd"/>
+                        <outlet property="cellViewR0C0" destination="VpR-ow-aVl" id="1Vz-fP-d0l"/>
+                        <outlet property="cellViewR0C1" destination="AfB-Ij-kfz" id="dAf-TJ-pUS"/>
+                        <outlet property="cellViewR0C2" destination="3uK-jf-WjG" id="v29-KB-Psa"/>
+                        <outlet property="cellViewR1C0" destination="pcj-dU-Nu0" id="8cl-a2-dec"/>
+                        <outlet property="cellViewR1C1" destination="pUa-1P-Xvd" id="ePp-8t-OMc"/>
+                        <outlet property="cellViewR1C2" destination="yXq-vh-o9V" id="hGY-id-DGQ"/>
+                        <outlet property="cellViewR2C0" destination="28y-d3-A5b" id="B4u-br-y9k"/>
+                        <outlet property="cellViewR2C1" destination="eaJ-HV-0Br" id="JMT-18-Clz"/>
+                        <outlet property="cellViewR2C2" destination="m1J-sy-oDz" id="uBS-Pv-Tvd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

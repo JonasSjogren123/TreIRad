@@ -11,15 +11,19 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var viewBoardBackground: UIImageView!
     
-    @IBOutlet weak var viewR0C0: UIButton!
-    @IBOutlet weak var viewR0C1: UIButton!
-    @IBOutlet weak var viewR0C2: UIButton!
-    @IBOutlet weak var viewR1C0: UIButton!
-    @IBOutlet weak var viewR1C1: UIButton!
-    @IBOutlet weak var viewR1C2: UIButton!
-    @IBOutlet weak var viewR2C0: UIButton!
-    @IBOutlet weak var viewR2C1: UIButton!
-    @IBOutlet weak var viewR2C2: UIButton!
+    @IBOutlet weak var cellViewR0C0: UIButton!
+    @IBOutlet weak var cellViewR0C1: UIButton!
+    @IBOutlet weak var cellViewR0C2: UIButton!
+    @IBOutlet weak var cellViewR1C0: UIButton!
+    @IBOutlet weak var cellViewR1C1: UIButton!
+    @IBOutlet weak var cellViewR1C2: UIButton!
+    @IBOutlet weak var cellViewR2C0: UIButton!
+    @IBOutlet weak var cellViewR2C1: UIButton!
+    @IBOutlet weak var cellViewR2C2: UIButton!
+    
+    var cellView : UIButton?
+    
+    var cellNumber : Int?
     
     
     let board = Board()
@@ -44,46 +48,8 @@ class ViewController: UIViewController {
     var turnPlayerB: Bool = false
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //let gameLogicTest02 = Board()
-        
-        //gameLogicTest02.makeAMove()
-        
-        //viewBoardBackground.backgroundColor = colorBoardBackground
+
     }
-    
-    /*func playerTurn () {
-     
-     if turnPlayerA {
-     turnPlayerA = false
-     turnPlayerB = true
-     } else {
-     turnPlayerA = true
-     turnPlayerB = false
-     }
-     
-     }
-     */
-    /*
-     func claimCell () {
-     let playerNone = 0
-     let playerA = 1
-     let playerB = 2
-     let cellPlayer = playerNone
-     
-     switch cellPlayer {
-     case playerA:
-     case playerB:
-     default:
-     }
-     if (cellPlayer == playerNone) {}
-     if (cellPlayer == playerA) {}
-     if (cellPlayer == playerB) {}
-     }
-     */
-    
-    var passPositionToBoard : String?
     
     func assignColor() {
 //        switch board.togglePlayerTurn(cell.player.symbol) {
@@ -96,22 +62,70 @@ class ViewController: UIViewController {
 //        }
     }
     
-    func assignCell(cell: Cell) -> Cell{
-        let cell = cell
-        return cell
+    func assignCellView(){
+        
+        let cellNumber = self.cellNumber
+        
+        switch cellNumber {
+        case 1:
+            cellView = cellViewR0C0
+        case 2:
+            cellView = cellViewR0C1
+        case 3:
+            cellView = cellViewR0C2
+        case 4:
+            cellView = cellViewR1C0
+        case 5:
+            cellView = cellViewR1C1
+        case 6:
+            cellView = cellViewR1C2
+        case 7:
+            cellView = cellViewR2C0
+        case 8:
+            cellView = cellViewR2C1
+        default:
+            cellView = cellViewR2C2
+        }
+        
+        //print(board.gamePlay.cell.player.term)
+        
     }
+
+    /*func assignCellView() -> UIButton {
+        
+        //var cellNumber = board.makeAMove(place:)
+        
+        let cellNumber = 7
+        
+        switch cellNumber {
+        case 1:
+            return cellViewR0C0
+        case 2:
+            return cellViewR0C1
+        case 3:
+            return cellViewR0C2
+        case 4:
+            return cellViewR1C0
+        case 5:
+            return cellViewR1C1
+        case 6:
+            return cellViewR1C2
+        case 7:
+            return cellViewR2C0
+        case 8:
+            return cellViewR2C1
+        default:
+            return cellViewR2C2
+        }
+    }
+ */
     
-   // @IBAction func buttonR0C0(_ sender: UIButton) {
-        //        viewR0C0.backgroundColor = colorPlayerA
-        //        if board.togglePlayerTurn(board.cellR0C0.board.playerA.symbol, ) == board.playerA.symbol {
-        //            viewR0C0.backgroundColor = colorPlayerA
-        //        } else if board.togglePlayerTurn(board.cellR0C0,board.playerB) == board.playerB.symbol {
-        //            viewR0C0.backgroundColor = colorPlayerB
-    //}
-    
-    @IBAction func buttonR0C1(_ sender: UIButton) {
-        viewR0C1.backgroundColor = colorPlayerB
+    @IBAction func gameButtons(_ sender: UIButton) {
+        
         board.makeAMove(place: sender.tag)
+        self.cellNumber = sender.tag
+        assignCellView()
+        self.cellView?.backgroundColor = colorPlayerB
        // assignColor()
         
     }
