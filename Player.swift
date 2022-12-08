@@ -7,10 +7,21 @@
 
 import Foundation
 
-class Player {
+class Player : Equatable {
+   
+    let id = UUID()
+    let symbol : String
+    let term : Int
     
-//    init () {
-//        magicNumber : Int
-//    }
+    init (symbol: String, term: Int)
+    {
+        self.symbol = symbol
+        self.term = term
+    }
+    
+    static func == (lhs: Player, rhs: Player) -> Bool {
+        return lhs.symbol == rhs.symbol
+    }
+    
     
 }

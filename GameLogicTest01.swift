@@ -9,27 +9,27 @@ import Foundation
 
 class GameLogicTest01 {
     
-    let empty = "_"
-    let circle = "O"
-    let cross = "X"
+    let playerNone = Player(symbol: "_", term: 0)
+    let playerA = Player(symbol: "X", term: 1)
+    let playerB = Player(symbol: "O", term: 4)
     
-    var row0 : [String]
-    var row1 : [String]
-    var row2 : [String]
+    var row0 : [Player]
+    var row1 : [Player]
+    var row2 : [Player]
     
     init() {
-        row0 = [empty, empty, empty]
-        row1 = [empty, empty, empty]
-        row2 = [empty, empty, empty]
+        row0 = [playerNone, playerNone, playerNone]
+        row1 = [playerNone, playerNone, playerNone]
+        row2 = [playerNone, playerNone, playerNone]
     }
     
     func makeAMove() {
-        row0[1] = circle
-        row1[1] = cross
-        row2[0] = circle
-        row1[0] = cross
-        row1[2] = circle
-        row2[2] = cross
+        row0[1] = playerA
+        row1[1] = playerB
+        row2[0] = playerA
+        row1[0] = playerB
+        row1[2] = playerA
+        row2[2] = playerB
         
         print("\(row0)")
         print("\(row1)")
