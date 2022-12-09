@@ -16,8 +16,9 @@ class Board {
     var turnPlayerA: Bool = true
     var turnPlayerB: Bool = false
     
-    var curentPlayer : Player
-    var curenCell : Cell?
+    var curentPlayerTurn : Player
+    var assignPlayerToCell : Player
+    //var curenCell : Cell?
     
     var playerACount = 0
     var playerBCount = 0
@@ -53,7 +54,8 @@ class Board {
         diagonal1 = [row0[0], row1[1], row2[2]]
         diagonal2 = [row0[2], row1[1], row2[0]]
         
-        curentPlayer = playerA
+        curentPlayerTurn = playerA
+        assignPlayerToCell = playerNone
     }
 
     func makeAMove(place: Int) -> Cell {
@@ -104,7 +106,7 @@ class Board {
         return cell
     }
         
-        func gamePlay (_ cell : Cell) -> Int{
+        func gamePlay (_ cell : Cell) -> Player{
             let cell = cell
             if cell.player.term == self.playerNone.term {
                 if turnPlayerA && playerACount < 3{
@@ -112,13 +114,15 @@ class Board {
                     playerACount += 1
                     turnPlayerA = false
                     turnPlayerB = true
-                    self.curentPlayer = playerB
+                    self.assignPlayerToCell = playerA
+                    self.curentPlayerTurn = playerB
                 } else if playerBCount < 3 {
                     cell.player = playerB
                     playerBCount += 1
                     turnPlayerA = true
                     turnPlayerB = false
-                    self.curentPlayer = playerA
+                    self.assignPlayerToCell = playerB
+                    self.curentPlayerTurn = playerA
                 }
             } else if cell.player.term == self.playerA.term {
                 if (turnPlayerA == true) && playerACount > 2 {
@@ -126,7 +130,8 @@ class Board {
                     playerACount -= 1
                     turnPlayerA = true
                     turnPlayerB = false
-                    self.curentPlayer = playerA
+                    self.assignPlayerToCell = playerNone
+                    self.curentPlayerTurn = playerA
                 } else if cell.player.term == self.playerB.term {}
             } else if cell.player.term == self.playerB.term {
                 if (turnPlayerB == true) && playerBCount > 2 {
@@ -134,10 +139,12 @@ class Board {
                     playerBCount -= 1
                     turnPlayerA = false
                     turnPlayerB = true
-                    self.curentPlayer = playerB
+                    self.assignPlayerToCell = playerNone
+                    self.curentPlayerTurn = playerB
                 } else if cell.player.term == self.playerA.term {}
             }
-            return cell.player.term
+            return assignPlayerToCell
+
         }
         
         func checkWhoWins() {
