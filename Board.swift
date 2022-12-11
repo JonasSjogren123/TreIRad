@@ -9,20 +9,16 @@ import Foundation
 
 class Board {
     
-    let playerNone = Player(symbol: "_", term: 0)
-    let playerA = Player(symbol: "O", term: 1)
-    let playerB = Player(symbol: "X", term: 4)
-    
+    let playerOfDoom = Player(symbol: "_", term: 0, name: "Doom")
+    let playerA = Player(symbol: "O", term: 1, name: "A")
+    let playerB = Player(symbol: "X", term: 4, name: "B" )
+    var winningPlayer : Player?
     var turnPlayerA: Bool = true
     var turnPlayerB: Bool = false
-    
     var curentPlayerTurn : Player
     var assignPlayerToCell : Player
-    //var curenCell : Cell?
-    
     var playerCountA = 0
     var playerCountB = 0
-    
     var row0 : [Cell]
     var row1 : [Cell]
     var row2 : [Cell]
@@ -31,19 +27,21 @@ class Board {
     var column2 : [Cell]
     var diagonal1 : [Cell]
     var diagonal2 : [Cell]
+    var completeBoard : [[Cell]]
+    var sequenceOfCompleteBoards : [[[Cell]]]
     
     let cellR0C0, cellR0C1, cellR0C2, cellR1C0, cellR1C1, cellR1C2, cellR2C0, cellR2C1, cellR2C2 : Cell
     
     init() {
-        self.cellR0C0 = Cell(player: playerNone)
-        self.cellR0C1 = Cell(player: playerNone)
-        self.cellR0C2 = Cell(player: playerNone)
-        self.cellR1C0 = Cell(player: playerNone)
-        self.cellR1C1 = Cell(player: playerNone)
-        self.cellR1C2 = Cell(player: playerNone)
-        self.cellR2C0 = Cell(player: playerNone)
-        self.cellR2C1 = Cell(player: playerNone)
-        self.cellR2C2 = Cell(player: playerNone)
+        self.cellR0C0 = Cell(player: playerOfDoom)
+        self.cellR0C1 = Cell(player: playerOfDoom)
+        self.cellR0C2 = Cell(player: playerOfDoom)
+        self.cellR1C0 = Cell(player: playerOfDoom)
+        self.cellR1C1 = Cell(player: playerOfDoom)
+        self.cellR1C2 = Cell(player: playerOfDoom)
+        self.cellR2C0 = Cell(player: playerOfDoom)
+        self.cellR2C1 = Cell(player: playerOfDoom)
+        self.cellR2C2 = Cell(player: playerOfDoom)
         
         row0 = [cellR0C0, cellR0C1, cellR0C2]
         row1 = [cellR1C0, cellR1C1, cellR1C2]
@@ -54,8 +52,12 @@ class Board {
         diagonal1 = [row0[0], row1[1], row2[2]]
         diagonal2 = [row0[2], row1[1], row2[0]]
         
+        completeBoard = [row0, row1, row2]
+        sequenceOfCompleteBoards = []
+        
         curentPlayerTurn = playerA
-        assignPlayerToCell = playerNone
+        assignPlayerToCell = playerOfDoom
+        winningPlayer = nil
     }
 
     func makeAMove(place: Int) -> Cell {
@@ -101,14 +103,15 @@ class Board {
             cell = cellR2C2
             cellNumber = 9
         }
-               
+        
+        saveCompleteBoard()
         checkWhoWins()
         return cell
     }
         
         func gamePlay (_ cell : Cell) -> Player{
             let cell = cell
-            if cell.player.term == self.playerNone.term {
+            if cell.player.term == self.playerOfDoom.term {
                 if turnPlayerA && playerCountA < 3 {
                     cell.player = playerA
                     playerCountA += 1
@@ -117,7 +120,6 @@ class Board {
                     self.curentPlayerTurn = playerB
                 } else if turnPlayerB && playerCountB < 3 {
                     cell.player = playerB
-                    self.assignPlayerToCell = playerB
                     playerCountB += 1
                     turnPlayerA = true
                     turnPlayerB = false
@@ -125,7 +127,7 @@ class Board {
                 }
             } else if cell.player.term == self.playerA.term {
                 if (turnPlayerA == true) && playerCountA > 2 {
-                    cell.player = playerNone
+                    cell.player = playerOfDoom
                     playerCountA -= 1
                     turnPlayerA = true
                     turnPlayerB = false
@@ -133,29 +135,55 @@ class Board {
                 } else {}
             } else if cell.player.term == self.playerB.term {
                 if (turnPlayerB == true) && playerCountB > 2 {
-                    cell.player = playerNone
+                    cell.player = playerOfDoom
                     playerCountB -= 1
                     turnPlayerA = false
                     turnPlayerB = true
                     self.curentPlayerTurn = playerB
                 } else {}
             }
-            
             switch cell.player.term {
             case 1:
                 assignPlayerToCell = playerA
             case 4:
                 assignPlayerToCell = playerB
             default:
-                assignPlayerToCell = playerNone
+                assignPlayerToCell = playerOfDoom
             }
             print()
             print()
             print()
-            print("cell.player.term", cell.player.term)
             return assignPlayerToCell
-
         }
+    
+    func saveCompleteBoard () {
+        sequenceOfCompleteBoards.append(completeBoard)
+        print("completeBoard",completeBoard)
+        for row in completeBoard {
+            print()
+            for cell in row {
+            print(cell.player.term)
+            }
+        }
+    }
+    
+    func replaySequenceOfCompleteBoards() {
+        for completeBoard in sequenceOfCompleteBoards {
+            print()
+            print()
+            for row in completeBoard {
+                print()
+                for cell in row {
+                print(cell.player.term)
+                }
+            }
+        }
+    }
+    
+    func doWinningStuff(player: Player) {
+        print("player",player.name, "wins!!!!!")
+        replaySequenceOfCompleteBoards()
+    }
         
         func checkWhoWins() {
   
@@ -181,16 +209,28 @@ class Board {
             print(sumDiagonal2,",", sumColumn0,",", sumColumn1,",", sumColumn2, " ", sumDiagonal1)
             print("playerCountA = ",playerCountA, ", ", "playerCountB = ", playerCountB)
 
-            if (sumRow0  == 3 || sumRow1 == 3 || sumRow2 == 3 || sumColumn0 == 3 || sumColumn1 == 3 || sumColumn2 == 3 || sumDiagonal1 == 3 || sumDiagonal2 == 3) {
-                print("Player1 wins!")
-            } else if (sumRow0  == 12 || sumRow1 == 12 || sumRow2 == 12 || sumColumn0 == 12 || sumColumn1 == 12 || sumColumn2 == 12 || sumDiagonal1 == 12 || sumDiagonal2 == 12) {
-                print("Player2 wins!")
-            } else {
+            
+                    if (sumRow0  == 3 || sumRow1 == 3 || sumRow2 == 3 || sumColumn0 == 3 || sumColumn1 == 3 || sumColumn2 == 3 || sumDiagonal1 == 3 || sumDiagonal2 == 3) {
+                        winningPlayer = playerA
+                        doWinningStuff(player: winningPlayer ?? playerOfDoom)
+                        print("PlayerA wins!")
+                    } else if (sumRow0  == 12 || sumRow1 == 12 || sumRow2 == 12 || sumColumn0 == 12 || sumColumn1 == 12 || sumColumn2 == 12 || sumDiagonal1 == 12 || sumDiagonal2 == 12) {
+                        winningPlayer = playerB
+                        doWinningStuff(player: winningPlayer ?? playerOfDoom)
+                        print("PlayerB wins!")
+                    }
+                    else if ((playerCountA > 2 && playerCountB > 2) && ((sumRow0  == 00 || sumRow1 == 00 || sumRow2 == 00 || sumColumn0 == 00 || sumColumn1 == 00 || sumColumn2 == 00 || sumDiagonal1 == 00 || sumDiagonal2 == 00))) {
+                        winningPlayer = playerOfDoom
+                        doWinningStuff(player: winningPlayer ?? playerOfDoom)
+                        print("PlayerofDoom wins!")
+                    }
+             else {
                 print("Next move!")
             }
             print("assignPlayerToCell.term ",assignPlayerToCell.term)
             print("turnPlayerA = ", turnPlayerA," turnPlayerB = ", turnPlayerB)
             print("curentPlayerTurn.term = ",curentPlayerTurn.term)
+            
         }
     
     }
