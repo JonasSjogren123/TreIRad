@@ -34,13 +34,13 @@ class ViewController: UIViewController {
 
     let colorBoardBackground = #colorLiteral(red: 0.0, green: 0.0, blue: 0.0,
                                              alpha: 0.1)
-    let colorPlayerA = #colorLiteral(red: 0.5, green: 0.5, blue: 0.1,
+    let colorPlayerA = #colorLiteral(red: 0.3, green: 0.8, blue: 0.0,
                                      alpha: 1)
-    let colorPlayerB =  #colorLiteral(red: 0.8, green: 0.1, blue: 0.1,
+    let colorPlayerB =  #colorLiteral(red: 0.8, green: 0.3, blue: 0.1,
                                       alpha: 1)
     let colorPlayerNone = #colorLiteral(red: 0.1, green: 0.1, blue: 0.1,
                                         alpha: 1)
-    let colorPlayerAWin = #colorLiteral(red: 0.8, green: 0.8, blue: 0.0,
+    let colorPlayerAWin = #colorLiteral(red: 0.3, green: 0.3, blue: 0.8,
                                      alpha: 1)
     let colorPlayerBWin =  #colorLiteral(red: 1.0, green: 0.0, blue: 0.0,
                                       alpha: 1)
@@ -53,10 +53,10 @@ class ViewController: UIViewController {
         
         curentPlayer = self.board.playerA
         cellColor = colorPlayerNone
-        cellViewR0C0.backgroundColor = colorPlayerNone
         cellViews = [cellViewR0C0, cellViewR0C1, cellViewR0C2, cellViewR1C0, cellViewR1C1, cellViewR1C2, cellViewR2C0, cellViewR2C1, cellViewR2C2]
         
         initializeCellViewColors()
+        
     }
     
     func initializeCellViewColors() {
@@ -66,7 +66,6 @@ class ViewController: UIViewController {
     }
     
     func assignCellViewColor(_ assignCellView : () -> UIButton?) {
-        let cellView = assignCellView()
         
         switch board.assignPlayerToCell {
         case board.playerA:
@@ -143,9 +142,10 @@ class ViewController: UIViewController {
         board.makeAMove(place: sender.tag)
         self.cellNumber = sender.tag
         assignCellView()
-        curentPlayer = board.curentPlayerTurn
-        self.cellView?.backgroundColor = colorPlayerB
-        assignCellViewColor(assignCellView)
+        assignCellViewColor({
+            assignCellView()
+        })
+        
         
     }
     
