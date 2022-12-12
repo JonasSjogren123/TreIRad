@@ -34,16 +34,18 @@ class ViewController: UIViewController {
 
     let colorBoardBackground = #colorLiteral(red: 0.0, green: 0.0, blue: 0.0,
                                              alpha: 0.1)
-    let colorPlayerA = #colorLiteral(red: 0.3, green: 0.8, blue: 0.0,
+    let colorPlayerA = #colorLiteral(red: 0.0, green: 0.0, blue: 0.8,
                                      alpha: 1)
-    let colorPlayerB =  #colorLiteral(red: 0.8, green: 0.3, blue: 0.1,
+    let colorPlayerB =  #colorLiteral(red: 0.8, green: 0.8, blue: 0.0,
                                       alpha: 1)
     let colorPlayerNone = #colorLiteral(red: 0.1, green: 0.1, blue: 0.1,
                                         alpha: 1)
     let colorPlayerAWin = #colorLiteral(red: 0.3, green: 0.3, blue: 0.8,
                                      alpha: 1)
-    let colorPlayerBWin =  #colorLiteral(red: 1.0, green: 0.0, blue: 0.0,
+    let colorPlayerBWin =  #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
                                       alpha: 1)
+    let colorPlayerOfDoomWin = #colorLiteral(red: 1.0, green: 0.0, blue: 0.0,
+                                        alpha: 1)
     
     var turnPlayerA: Bool = true
     var turnPlayerB: Bool = false
