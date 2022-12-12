@@ -9,6 +9,7 @@ import Foundation
 
 class Board {
     
+    var singlePlayer : Bool = false
     let playerOfDoom = Player(symbol: "_", term: 0, name: "Doom")
     let playerA = Player(symbol: "O", term: 1, name: "A")
     let playerB = Player(symbol: "X", term: 4, name: "B" )
@@ -29,6 +30,9 @@ class Board {
     var diagonal2 : [Cell]
     var completeBoard : [[Cell]]
     var sequenceOfCompleteBoards : [[[Cell]]]
+    var playerOfDoomCells : [Cell]
+    var playerACells : [Cell]
+    var playerBCells : [Cell]
     
     let cellR0C0, cellR0C1, cellR0C2, cellR1C0, cellR1C1, cellR1C2, cellR2C0, cellR2C1, cellR2C2 : Cell
     
@@ -54,6 +58,9 @@ class Board {
         
         completeBoard = [row0, row1, row2]
         sequenceOfCompleteBoards = []
+        playerACells = []
+        playerBCells = []
+        playerOfDoomCells = [cellR0C0, cellR0C1, cellR0C2, cellR1C0, cellR1C1, cellR1C2, cellR2C0, cellR2C1, cellR2C2]
         
         curentPlayerTurn = playerA
         assignPlayerToCell = playerOfDoom
@@ -118,12 +125,16 @@ class Board {
                     turnPlayerA = false
                     turnPlayerB = true
                     self.curentPlayerTurn = playerB
+                    playerACells.append(cell)
+                    playerOfDoomCells = playerOfDoomCells.filter { $0 != cell }
                 } else if turnPlayerB && playerCountB < 3 {
                     cell.player = playerB
                     playerCountB += 1
                     turnPlayerA = true
                     turnPlayerB = false
                     self.curentPlayerTurn = playerA
+                    playerBCells.append(cell)
+                    playerOfDoomCells = playerOfDoomCells.filter { $0 != cell }
                 }
             } else if cell.player.term == self.playerA.term {
                 if (turnPlayerA == true) && playerCountA > 2 {
@@ -132,6 +143,8 @@ class Board {
                     turnPlayerA = true
                     turnPlayerB = false
                     self.curentPlayerTurn = playerA
+                    playerACells = playerACells.filter { $0 != cell }
+                    playerOfDoomCells.append(cell)
                 } else {}
             } else if cell.player.term == self.playerB.term {
                 if (turnPlayerB == true) && playerCountB > 2 {
@@ -140,6 +153,8 @@ class Board {
                     turnPlayerA = false
                     turnPlayerB = true
                     self.curentPlayerTurn = playerB
+                    playerBCells = playerBCells.filter { $0 != cell }
+                    playerOfDoomCells.append(cell)
                 } else {}
             }
             switch cell.player.term {
@@ -153,6 +168,14 @@ class Board {
             print()
             print()
             print()
+            for cell in playerOfDoomCells {
+                print("Doom ",cell.player.term)}
+            print()
+            for cell in playerACells {
+                print("A ",cell.player.term)}
+            print()
+            for cell in playerBCells {
+                print("B ",cell.player.term)}
             return assignPlayerToCell
         }
     

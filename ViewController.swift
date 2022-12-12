@@ -30,21 +30,24 @@ class ViewController: UIViewController {
     let board = Board()
         
     var cell : Cell?
+    
+    
+    
     var cellColor : UIColor?
 
     let colorBoardBackground = #colorLiteral(red: 0.0, green: 0.0, blue: 0.0,
                                              alpha: 0.1)
-    let colorPlayerA = #colorLiteral(red: 0.0, green: 0.0, blue: 0.8,
-                                     alpha: 1)
-    let colorPlayerB =  #colorLiteral(red: 0.8, green: 0.8, blue: 0.0,
-                                      alpha: 1)
-    let colorPlayerNone = #colorLiteral(red: 0.1, green: 0.1, blue: 0.1,
+    var colorPlayerA = #colorLiteral(red: 0.0, green: 0.0, blue: 0.8,
+                                     alpha: 0.7)
+    var colorPlayerB =  #colorLiteral(red: 0.8, green: 0.8, blue: 0.0,
+                                      alpha: 0.7)
+    var colorPlayerNone = #colorLiteral(red: 0.1, green: 0.1, blue: 0.1,
                                         alpha: 1)
-    let colorPlayerAWin = #colorLiteral(red: 0.3, green: 0.3, blue: 0.8,
+    var colorPlayerAWin = #colorLiteral(red: 0.3, green: 0.3, blue: 0.8,
                                      alpha: 1)
-    let colorPlayerBWin =  #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
+    var colorPlayerBWin =  #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
                                       alpha: 1)
-    let colorPlayerOfDoomWin = #colorLiteral(red: 1.0, green: 0.0, blue: 0.0,
+    var colorPlayerOfDoomWin = #colorLiteral(red: 1.0, green: 0.0, blue: 0.0,
                                         alpha: 1)
     
     var turnPlayerA: Bool = true
@@ -52,6 +55,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var playerACells : [Cell] = board.playerACells
+        var playerBCells : [Cell] = board.playerBCells
+        var playerOfDoomCells  : [Cell] = board.playerOfDoomCells
         
         curentPlayer = self.board.playerA
         cellColor = colorPlayerNone
@@ -71,11 +78,32 @@ class ViewController: UIViewController {
         
         switch board.assignPlayerToCell {
         case board.playerA:
+            if board.winningPlayer == board.playerA{
+                self.colorPlayerA = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
+                                                  alpha: 1)
+                for cell in board.playerACells {
+                    
+                }
+            } else {
+                self.colorPlayerA = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
+                                                  alpha: 0.5)}
             self.cellView?.backgroundColor = colorPlayerA
         case board.playerB:
+            if board.winningPlayer == board.playerB{
+                self.colorPlayerB = #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
+                                                  alpha: 1)
+            } else {
+                self.colorPlayerB = #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
+                                                  alpha: 0.5)}
             self.cellView?.backgroundColor = colorPlayerB
         default:
-            self.cellView?.backgroundColor = colorPlayerNone
+            if board.winningPlayer == board.playerOfDoom{
+            self.colorPlayerOfDoomWin = #colorLiteral(red: 1.0, green: 0.0, blue: 0.0,
+                                              alpha: 0.1)}
+            else {
+                self.cellView?.backgroundColor = colorPlayerNone
+                
+            }
         }
     }
     
