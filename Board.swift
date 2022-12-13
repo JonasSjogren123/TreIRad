@@ -126,23 +126,36 @@ class Board {
     }
     
     func autoMovePlayerB() -> Cell {
+        print()
+        print()
+        print()
+        print()
+        print("autoMovePlayerB")
         var cell : Cell?
         var index = 0
         if turnPlayerB {
             if playerCountB < 3 {
-                index = Int.random(in: 0...(playerOfDoomCells.count-1))
+                index = Int.random(in: 0...((playerOfDoomCells.count)-1))
+                print("playerOfDoomCells index = ",index)
+                print("playerOfDoomCells.count = ",playerOfDoomCells.count)
                 gamePlay(playerOfDoomCells[index])
+                print("playerOfDoomCells index = ",index)
+                print("playerOfDoomCells.count", playerOfDoomCells.count)
                 cell = playerOfDoomCells[index]
             } else if playerCountB > 2 {
                 index = Int.random(in: 0...(playerBCells.count-1))
+                print("playerBCells index = ",index)
                 gamePlay(playerBCells[index])
-                cell = playerOfDoomCells[index]
+                print("playerBCells index = ",index)
+                cell = playerBCells[index]
             }
         }
         return cell ?? cellR0C0
     }
         
         func gamePlay (_ cell : Cell) -> Player{
+            print("gamePlay")
+            print("playerOfDoomCells.count = ",playerOfDoomCells.count)
             let cell = cell
             if cell.player.term == self.playerOfDoom.term {
                 if turnPlayerA && playerCountA < 3 {

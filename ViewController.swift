@@ -22,14 +22,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var cellViewR2C2: UIButton!
     
     var cellViews : [UIButton] = []
+    var playerACellViews : [UIButton] = []
+    var playerBCellViews : [UIButton] = []
+    var playerOfDoomCellViews : [UIButton] = []
     
     var cellView : UIButton?
     var cellNumber : Int?
     var curentPlayer : Player?
+    var cell : Cell?
     
     let board = Board()
         
-    var cell : Cell?
+    
     
     
     
@@ -58,11 +62,17 @@ class ViewController: UIViewController {
         
         var playerACells : [Cell] = board.playerACells
         var playerBCells : [Cell] = board.playerBCells
-        var playerOfDoomCells  : [Cell] = board.playerOfDoomCells
+        var playerOfDoomCells : [Cell] = board.playerOfDoomCells
         
         curentPlayer = self.board.playerA
         cellColor = colorPlayerNone
         cellViews = [cellViewR0C0, cellViewR0C1, cellViewR0C2, cellViewR1C0, cellViewR1C1, cellViewR1C2, cellViewR2C0, cellViewR2C1, cellViewR2C2]
+        
+        playerACellViews = []
+        playerBCellViews = []
+        playerOfDoomCellViews = []
+        
+        
         
         initializeCellViewColors()
         
@@ -137,6 +147,20 @@ class ViewController: UIViewController {
         //print(board.gamePlay.cell.player.term)
         
     }
+    func pairingCellsToCellViews() {
+    for _ in board.playerACells {
+        print("board.playerACells.indices =", board.playerACells.indices)
+        //var indices : [Int] = board.playerACells.indices
+        print("playerACellViews.indices = ", playerACellViews.indices)
+        for cell in board.playerACells {print(cell.player.term)}
+        for index in board.playerACells.indices {
+            print("board.playerACells[index] = ", board.playerACells[index])
+            playerACellViews.append(cellViews[index])
+            print("playerACellViews[index] = ", playerACellViews[index])
+        }
+        //playerACellViews[index] = playerACellViews.append(<#UIButton#>)
+    }
+    }
 
     /*func assignCellView() -> UIButton {
         
@@ -168,20 +192,21 @@ class ViewController: UIViewController {
  */
     
     @IBAction func gameButtons(_ sender: UIButton) {
+        pairingCellsToCellViews()
         if board.gameIsFinnished == true {
             board.resetGame()
             initializeCellViewColors()
         } else {
-            if self.board.singlePlayer == false || board.turnPlayerA {
+           // if self.board.singlePlayer == false || board.turnPlayerA {
                 board.makeAMove(place: sender.tag)
                 self.cellNumber = sender.tag
                 assignCellView()
                 assignCellViewColor({
                     assignCellView()
                 })
-            } else {
-                board.autoMovePlayerB()
-            }
+            //} else {
+               // board.autoMovePlayerB()
+            //}
         }
     }
     
