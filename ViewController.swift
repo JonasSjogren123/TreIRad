@@ -168,17 +168,22 @@ class ViewController: UIViewController {
  */
     
     @IBAction func gameButtons(_ sender: UIButton) {
-        
-        board.makeAMove(place: sender.tag)
-        self.cellNumber = sender.tag
-        assignCellView()
-        assignCellViewColor({
-            assignCellView()
-        })
-        
-        
+        if board.gameIsFinnished == true {
+            board.resetGame()
+            initializeCellViewColors()
+        } else {
+            if self.board.singlePlayer == false || board.turnPlayerA {
+                board.makeAMove(place: sender.tag)
+                self.cellNumber = sender.tag
+                assignCellView()
+                assignCellViewColor({
+                    assignCellView()
+                })
+            } else {
+                board.autoMovePlayerB()
+            }
+        }
     }
-    
     
 }
 
