@@ -10,9 +10,11 @@ import Foundation
 class Cell : Equatable{
     
     var player : Player
+    let name : String
    
-     init (player : Player) {
+    init (name : String, player : Player) {
         self.player = player
+        self.name = name
     }
     
     static func == (lhs: Cell, rhs: Cell) -> Bool {

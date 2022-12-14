@@ -72,8 +72,6 @@ class ViewController: UIViewController {
         playerBCellViews = []
         playerOfDoomCellViews = []
         
-        
-        
         initializeCellViewColors()
         
     }

@@ -9,7 +9,7 @@ import Foundation
 
 class Board {
     
-    var singlePlayer : Bool = false
+    var singlePlayer : Bool = true
     var gameIsFinnished : Bool = false
     let playerOfDoom = Player(symbol: "_", term: 0, name: "Doom")
     let playerA = Player(symbol: "O", term: 1, name: "A")
@@ -23,6 +23,7 @@ class Board {
     var playerCountB = 0
     var playerAPoints = 0
     var playerBPoints = 0
+    var curentCell : Cell?
     var row0 : [Cell]
     var row1 : [Cell]
     var row2 : [Cell]
@@ -40,15 +41,15 @@ class Board {
     var cellR0C0, cellR0C1, cellR0C2, cellR1C0, cellR1C1, cellR1C2, cellR2C0, cellR2C1, cellR2C2 : Cell
     
     init() {
-        self.cellR0C0 = Cell(player: playerOfDoom)
-        self.cellR0C1 = Cell(player: playerOfDoom)
-        self.cellR0C2 = Cell(player: playerOfDoom)
-        self.cellR1C0 = Cell(player: playerOfDoom)
-        self.cellR1C1 = Cell(player: playerOfDoom)
-        self.cellR1C2 = Cell(player: playerOfDoom)
-        self.cellR2C0 = Cell(player: playerOfDoom)
-        self.cellR2C1 = Cell(player: playerOfDoom)
-        self.cellR2C2 = Cell(player: playerOfDoom)
+        self.cellR0C0 = Cell(name: "cellR0C0", player: playerOfDoom)
+        self.cellR0C1 = Cell(name: "cellR0C1", player: playerOfDoom)
+        self.cellR0C2 = Cell(name: "cellR0C2", player: playerOfDoom)
+        self.cellR1C0 = Cell(name: "cellR1C0", player: playerOfDoom)
+        self.cellR1C1 = Cell(name: "cellR1C1", player: playerOfDoom)
+        self.cellR1C2 = Cell(name: "cellR1C2", player: playerOfDoom)
+        self.cellR2C0 = Cell(name: "cellR2C0", player: playerOfDoom)
+        self.cellR2C1 = Cell(name: "cellR2C1", player: playerOfDoom)
+        self.cellR2C2 = Cell(name: "cellR2C2", player: playerOfDoom)
         
         row0 = [cellR0C0, cellR0C1, cellR0C2]
         row1 = [cellR1C0, cellR1C1, cellR1C2]
@@ -65,9 +66,14 @@ class Board {
         playerBCells = []
         playerOfDoomCells = [cellR0C0, cellR0C1, cellR0C2, cellR1C0, cellR1C1, cellR1C2, cellR2C0, cellR2C1, cellR2C2]
         
+        for cell in 0...playerOfDoomCells.count-1 {
+            print("playerOfDoomCells ", playerOfDoomCells[cell].name)
+        }
+        
         curentPlayerTurn = playerA
         assignPlayerToCell = playerOfDoom
         winningPlayer = nil
+        curentCell = nil
     }
 
     func makeAMove(place: Int) -> Cell? {
@@ -113,9 +119,11 @@ class Board {
                 cell = cellR2C2
                 cellNumber = 9
             }
+            curentCell = cell
         } else if singlePlayer == true && turnPlayerB == true {
             print("Call autoMovePlayerB")
             autoMovePlayerB()
+            curentCell = autoMovePlayerB()
             cell = autoMovePlayerB()
             print("Try to move playerB")
         }
@@ -141,9 +149,12 @@ class Board {
                 gamePlay(playerOfDoomCells[index])
                 print("playerOfDoomCells index = ",index)
                 print("playerOfDoomCells.count", playerOfDoomCells.count)
+                if index >= playerOfDoomCells.count {index -= 1}
                 cell = playerOfDoomCells[index]
             } else if playerCountB > 2 {
                 index = Int.random(in: 0...(playerBCells.count-1))
+                print("playerBCells index = ",index)
+                if index >= playerBCells.count {index -= 1}
                 print("playerBCells index = ",index)
                 gamePlay(playerBCells[index])
                 print("playerBCells index = ",index)
@@ -155,7 +166,11 @@ class Board {
         
         func gamePlay (_ cell : Cell) -> Player{
             print("gamePlay")
+            print("playerBCells.count = ",playerBCells.count)
+            print("playerBCells.indices = ", playerBCells.indices)
             print("playerOfDoomCells.count = ",playerOfDoomCells.count)
+            print("playerOfDoomCells.indices = ",playerOfDoomCells.indices)
+
             let cell = cell
             if cell.player.term == self.playerOfDoom.term {
                 if turnPlayerA && playerCountA < 3 {
@@ -305,15 +320,15 @@ class Board {
     func resetGame() {
         if gameIsFinnished {
             
-            self.cellR0C0 = Cell(player: playerOfDoom)
-            self.cellR0C1 = Cell(player: playerOfDoom)
-            self.cellR0C2 = Cell(player: playerOfDoom)
-            self.cellR1C0 = Cell(player: playerOfDoom)
-            self.cellR1C1 = Cell(player: playerOfDoom)
-            self.cellR1C2 = Cell(player: playerOfDoom)
-            self.cellR2C0 = Cell(player: playerOfDoom)
-            self.cellR2C1 = Cell(player: playerOfDoom)
-            self.cellR2C2 = Cell(player: playerOfDoom)
+            self.cellR0C0 = Cell(name: "cellR0C0", player: playerOfDoom)
+            self.cellR0C1 = Cell(name: "cellR0C1", player: playerOfDoom)
+            self.cellR0C2 = Cell(name: "cellR0C2", player: playerOfDoom)
+            self.cellR1C0 = Cell(name: "cellR1C0", player: playerOfDoom)
+            self.cellR1C1 = Cell(name: "cellR1C1", player: playerOfDoom)
+            self.cellR1C2 = Cell(name: "cellR1C2", player: playerOfDoom)
+            self.cellR2C0 = Cell(name: "cellR2C0", player: playerOfDoom)
+            self.cellR2C1 = Cell(name: "cellR2C1", player: playerOfDoom)
+            self.cellR2C2 = Cell(name: "cellR2C2", player: playerOfDoom)
             
             row0 = [cellR0C0, cellR0C1, cellR0C2]
             row1 = [cellR1C0, cellR1C1, cellR1C2]
