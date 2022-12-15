@@ -32,6 +32,7 @@ class Board {
     var column2 : [Cell]
     var diagonal1 : [Cell]
     var diagonal2 : [Cell]
+    var allCells : [Cell]
     var completeBoard : [[Cell]]
     var sequenceOfCompleteBoards : [[[Cell]]]
     var playerOfDoomCells : [Cell]
@@ -59,6 +60,10 @@ class Board {
         column2 = [row0[2], row1[2], row2[2]]
         diagonal1 = [row0[0], row1[1], row2[2]]
         diagonal2 = [row0[2], row1[1], row2[0]]
+        
+        //allCells = [cellR0C0, cellR0C1, cellR0C2, cellR1C0, cellR1C1, cellR1C2, cellR2C0, cellR2C1, cellR2C2]
+        
+        allCells = [row0[0], row0[1], row0[2], row1[0], row1[1], row1[2], row2[0], row2[1], row2[2]]
         
         completeBoard = [row0, row1, row2]
         sequenceOfCompleteBoards = []
@@ -137,6 +142,9 @@ class Board {
             print("Try to move playerB")
         }
         
+        for cell in allCells {
+            print(cell.name, cell.player.name, cell.player.term, cell.self, "!!!!!!!!!!!!!!!!!!!!!!")
+        }
         saveCompleteBoard()
         checkWhoWins()
         return cell
@@ -369,6 +377,13 @@ class Board {
             playerACells = []
             playerBCells = []
             playerOfDoomCells = [cellR0C0, cellR0C1, cellR0C2, cellR1C0, cellR1C1, cellR1C2, cellR2C0, cellR2C1, cellR2C2]
+            
+            for cell in allCells {
+                cell.player = playerOfDoom
+            }
+            
+            allCells = [row0[0], row0[1], row0[2], row1[0], row1[1], row1[2], row2[0], row2[1], row2[2]]
+
             
             curentPlayerTurn = playerA
             assignPlayerToCell = playerOfDoom

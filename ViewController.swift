@@ -39,10 +39,6 @@ class ViewController: UIViewController {
     
     let board = Board()
         
-    
-    
-    
-    
     var cellColor : UIColor?
 
     let colorBoardBackground = #colorLiteral(red: 0.0, green: 0.0, blue: 0.0,
@@ -88,6 +84,25 @@ class ViewController: UIViewController {
         
     }
     
+    func updateViewContollerToBoard() {
+        
+        print("!!! update! \(board.allCells.count)")
+        
+        for (index, cell) in board.allCells.enumerated() {
+            print("!!! update! \(cell.player.name)")
+            switch cell.player {
+            case board.playerA:
+                cellViews[index].backgroundColor = colorPlayerA
+            case board.playerB:
+                cellViews[index].backgroundColor = colorPlayerB
+            default:
+                cellViews[index].backgroundColor = colorPlayerNone
+            }
+        }
+    }
+    
+    
+    
     func initializeCellViewColors() {
         playerAStatusView.backgroundColor = colorPlayerA
         playerBStatusView.backgroundColor = colorPlayerB
@@ -104,7 +119,7 @@ class ViewController: UIViewController {
             if board.winningPlayer == board.playerA{
                 self.colorPlayerA = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
                                                   alpha: 1)
-                for cell in board.playerACells {
+                for cellView in playerACellViews {
                     
                 }
             } else {
@@ -131,37 +146,6 @@ class ViewController: UIViewController {
     }
     
     func assignCellView() -> UIButton? {
-        
-        let cellNumber = self.cellNumber
-        
-        switch cellNumber {
-        case 1:
-            curentCellView = cellViewR0C0
-        case 2:
-            curentCellView = cellViewR0C1
-        case 3:
-            curentCellView = cellViewR0C2
-        case 4:
-            curentCellView = cellViewR1C0
-        case 5:
-            curentCellView = cellViewR1C1
-        case 6:
-            curentCellView = cellViewR1C2
-        case 7:
-            curentCellView = cellViewR2C0
-        case 8:
-            curentCellView = cellViewR2C1
-        default:
-            curentCellView = cellViewR2C2
-        }
-        
-        return curentCellView
-        
-        //print(board.gamePlay.cell.player.term)
-        
-    }
-    
-    /*func assignCellView() -> UIButton? {
         
         var curentCell = self.board.curentCell
         print("self.board.curentCell = ", self.board.curentCell?.name)
@@ -218,7 +202,7 @@ class ViewController: UIViewController {
         print("assingCellView() cellView? ", curentCellView?.tag)
         print("self.board.curentCell = ", self.board.curentCell?.name)
         return curentCellView
-    }*/
+    }
     
     func pairingCellsToCellViews() {
     for _ in board.playerACells {
@@ -236,11 +220,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func gameButtons(_ sender: UIButton) {
-        
+        print("!!!!!!!!!!!!!!!!!!!!")
+            for (index, cell) in board.allCells.enumerated() {
+                print("!!! update! \(cell.player.name)", cell.name, index)
+        }
         pairingCellsToCellViews()
         if board.gameIsFinnished == true {
             board.resetGame()
             initializeCellViewColors()
+            updateViewContollerToBoard()
         } else {
            // if self.board.singlePlayer == false || board.turnPlayerA {
                 board.makeAMove(place: sender.tag)
@@ -255,6 +243,7 @@ class ViewController: UIViewController {
         }
         print("ViewController board.curentCell.name = ", board.curentCell?.name)
         print("ViewController curentCellView.tag", curentCellView?.tag)
+        updateViewContollerToBoard()
     }
     
     @IBAction func playerAStatusButton(_ sender: UIButton) {
