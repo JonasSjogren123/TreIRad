@@ -9,7 +9,7 @@ import Foundation
 
 class Board {
     
-    var singlePlayer : Bool = true
+    var singlePlayer : Bool = false
     var gameIsFinnished : Bool = false
     let playerOfDoom = Player(symbol: "_", term: 0, name: "Doom")
     let playerA = Player(symbol: "O", term: 1, name: "A")
@@ -163,10 +163,14 @@ class Board {
             } else if playerCountB > 2 {
                 index = Int.random(in: 0...(playerBCells.count-1))
                 print("playerBCells index = ",index)
+                print("playerBCells.count = ", playerBCells.count)
                 if index >= playerBCells.count {index -= 1}
                 print("playerBCells index = ",index)
                 gamePlay(playerBCells[index])
                 print("playerBCells index = ",index)
+                print("playerBCell.count = ",playerBCells.count)
+                print("Trying to perform cell = playerBCells[index ]Here playerBCells[index] index sometimes go out of range:")
+                if index >= playerBCells.count {index -= 1}
                 cell = playerBCells[index]
             }
         }
@@ -196,7 +200,13 @@ class Board {
                     turnPlayerA = true
                     turnPlayerB = false
                     self.curentPlayerTurn = playerA
+                    print("ganePlaye turnPlayerB && playerBCountB < 3 ")
+                    print("playerBCells.count = ",playerBCells.count)
+                    print("playerBCells index = ",playerBCells.indices)
                     playerBCells.append(cell)
+                    print("After playerBCells.append(cell)")
+                    print("playerBCells.count = ",playerBCells.count)
+                    print("playerBCells index = ",playerBCells.indices)
                     playerOfDoomCells = playerOfDoomCells.filter { $0 != cell }
                 }
             } else if cell.player.term == self.playerA.term {
@@ -215,8 +225,14 @@ class Board {
                     playerCountB -= 1
                     turnPlayerA = false
                     turnPlayerB = true
+                    print("ganePlaye turnPlayerB && playerBCountB > 2 ")
+                    print("playerBCells.count = ",playerBCells.count)
+                    print("playerBCells index = ",playerBCells.indices)
                     self.curentPlayerTurn = playerB
                     playerBCells = playerBCells.filter { $0 != cell }
+                    print("After playerBCells = playerBCells.filter { $0 != cell }")
+                    print("playerBCells.count = ",playerBCells.count)
+                    print("playerBCells index = ",playerBCells.indices)
                     playerOfDoomCells.append(cell)
                 } else {}
             }
@@ -248,7 +264,7 @@ class Board {
         for row in completeBoard {
             print()
             for cell in row {
-            print(cell.player.term)
+                print(cell.player.term, cell.player.name)
             }
         }
     }
