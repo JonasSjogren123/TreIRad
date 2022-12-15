@@ -85,41 +85,50 @@ class Board {
             case 1:
                 gamePlay(cellR0C0)
                 cell = cellR0C0
+                curentCell = cellR0C0
                 cellNumber = 1
             case 2:
                 gamePlay(cellR0C1)
                 cell = cellR0C1
+                curentCell = cellR0C1
                 cellNumber = 2
             case 3:
                 gamePlay(cellR0C2)
                 cell = cellR0C2
+                curentCell = cellR0C2
                 cellNumber = 3
             case 4:
                 gamePlay(cellR1C0)
                 cell = cellR1C0
+                curentCell = cellR1C0
                 cellNumber = 4
             case 5:
                 gamePlay(cellR1C1)
                 cell = cellR1C1
+                curentCell = cellR1C1
                 cellNumber = 5
             case 6:
                 gamePlay(cellR1C2)
                 cell = cellR1C2
+                curentCell = cellR1C2
                 cellNumber = 6
             case 7:
                 gamePlay(cellR2C0)
                 cell = cellR2C0
+                curentCell = cellR2C0
                 cellNumber = 7
             case 8:
                 gamePlay(cellR2C1)
                 cell = cellR2C1
+                curentCell = cellR2C1
                 cellNumber = 8
             default:
                 gamePlay(cellR2C2)
                 cell = cellR2C2
+                curentCell = cellR2C2
                 cellNumber = 9
             }
-            curentCell = cell
+            //curentCell = cell
         } else if singlePlayer == true && turnPlayerB == true {
             print("Call autoMovePlayerB")
             autoMovePlayerB()
