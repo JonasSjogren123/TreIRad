@@ -43,12 +43,16 @@ class ViewController: UIViewController {
 
     let colorBoardBackground = #colorLiteral(red: 0.0, green: 0.0, blue: 0.0,
                                              alpha: 0.1)
-    var colorPlayerA = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
+    var colorPlayerAPlay = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
                                      alpha: 0.7)
-    var colorPlayerB =  #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
+    var colorPlayerBPlay =  #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
                                       alpha: 0.7)
     var colorPlayerNone = #colorLiteral(red: 0.1, green: 0.1, blue: 0.1,
                                         alpha: 1)
+    var colorPlayerADim = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
+                                        alpha: 0.2)
+    var colorPlayerBDim = #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
+                                        alpha: 0.2)
     var colorPlayerAAccent = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
                                      alpha: 1)
     var colorPlayerBAccent =  #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
@@ -73,7 +77,7 @@ class ViewController: UIViewController {
         curentPlayer = self.board.playerA
         cellColor = colorPlayerNone
         playerAStatusView.backgroundColor = colorPlayerAAccent
-        playerBStatusView.backgroundColor = colorPlayerB
+        playerBStatusView.backgroundColor = colorPlayerBPlay
         
         cellViews = [cellViewR0C0, cellViewR0C1, cellViewR0C2, cellViewR1C0, cellViewR1C1, cellViewR1C2, cellViewR2C0, cellViewR2C1, cellViewR2C2]
         
@@ -82,58 +86,63 @@ class ViewController: UIViewController {
         playerOfDoomCellViews = []
         
         initializeCellViewColors()
-        
     }
     
     func updateViewContollerToBoard() {
-        for (index, cell) in board.allCells.enumerated() {
-            switch cell.player {
-            case board.playerA:
-                cellViews[index].backgroundColor = colorPlayerA
-                if board.winningPlayer == board.playerA {
-                    cellViews[index].backgroundColor = colorPlayerAAccent
-                    colorPlayerA = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
-                                                     alpha: 0.5)
-                    colorPlayerB =  #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
-                                                      alpha: 0.5)
-                }
-            case board.playerB:
-                cellViews[index].backgroundColor = colorPlayerB
-                if board.winningPlayer == board.playerB {
-                    cellViews[index].backgroundColor = colorPlayerBAccent
-                    colorPlayerA = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
-                                                     alpha: 0.5)
-                }
-            default:
-                cellViews[index].backgroundColor = colorPlayerNone
-                if board.winningPlayer == board.playerOfDoom {
-                    cellViews[index].backgroundColor = colorPlayerOfDoomAccent
-                    colorPlayerA = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
-                                                     alpha: 0.3)
-                    colorPlayerB =  #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
-                                                      alpha: 0.3)
-                    
+        switch board.winningPlayer {
+        case nil:
+            for (index, cell) in board.allCells.enumerated() {
+                switch cell.player {
+                case board.playerA:
+                    cellViews[index].backgroundColor = colorPlayerAPlay
+                case board.playerB:
+                    cellViews[index].backgroundColor = colorPlayerBPlay
+                default: // board.playerOFDoom
+                    cellViews[index].backgroundColor = colorPlayerNone
                 }
             }
-        }
-        if board.gameIsFinnished {
-            playerAStatusView.backgroundColor = colorPlayerA
-            playerBStatusView.backgroundColor = colorPlayerB
-        } else if board.turnPlayerA {
-            playerAStatusView.backgroundColor = colorPlayerAAccent
-            playerBStatusView.backgroundColor = colorPlayerB
-        } else if board.turnPlayerB {
-            playerBStatusView.backgroundColor = colorPlayerBAccent
-            playerAStatusView.backgroundColor = colorPlayerA
+        case board.playerA:
+            for (index, cell) in board.allCells.enumerated() {
+                switch cell.player {
+                case board.playerA:
+                    cellViews[index].backgroundColor = colorPlayerAAccent
+                case board.playerB:
+                    cellViews[index].backgroundColor = colorPlayerBDim
+                default: // board.playerOFDoom
+                    cellViews[index].backgroundColor = colorPlayerNone
+                }
+            }
+        case board.playerB:
+            for (index, cell) in board.allCells.enumerated() {
+                switch cell.player {
+                case board.playerA:
+                    cellViews[index].backgroundColor = colorPlayerADim
+                case board.playerB:
+                    cellViews[index].backgroundColor = colorPlayerBAccent
+                default: // board.playerOFDoom
+                    cellViews[index].backgroundColor = colorPlayerNone
+                }
+            }
+        default: // board.playerOfDoom
+            for (index, cell) in board.allCells.enumerated() {
+                switch cell.player {
+                case board.playerA:
+                    cellViews[index].backgroundColor = colorPlayerADim
+                case board.playerB:
+                    cellViews[index].backgroundColor = colorPlayerBDim
+                default: // board.playerOFDoom
+                    cellViews[index].backgroundColor = colorPlayerOfDoomAccent
+                }
+            }
         }
     }
     
     func initializeCellViewColors() {
         let colorBoardBackground = #colorLiteral(red: 0.0, green: 0.0, blue: 0.0,
                                                  alpha: 0.1)
-        colorPlayerA = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
+        colorPlayerAPlay = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
                                          alpha: 0.7)
-        colorPlayerB =  #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
+        colorPlayerBPlay =  #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
                                           alpha: 0.7)
         colorPlayerNone = #colorLiteral(red: 0.1, green: 0.1, blue: 0.1,
                                             alpha: 1)
@@ -143,8 +152,8 @@ class ViewController: UIViewController {
                                           alpha: 1)
         colorPlayerOfDoomAccent = #colorLiteral(red: 1.0, green: 0.0, blue: 0.0,
                                             alpha: 1)
-        playerAStatusView.backgroundColor = colorPlayerA
-        playerBStatusView.backgroundColor = colorPlayerB
+        playerAStatusView.backgroundColor = colorPlayerAPlay
+        playerBStatusView.backgroundColor = colorPlayerBPlay
 
         for cellView in cellViews {
             cellView.backgroundColor = self.cellColor

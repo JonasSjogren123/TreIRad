@@ -13,12 +13,14 @@ class Player : Equatable {
     let symbol : String
     let term : Int
     let name : String
+    var status : String
     
-    init (symbol: String, term: Int, name: String)
+    init (symbol: String, term: Int, name: String, status : String)
     {
         self.symbol = symbol
         self.term = term
         self.name = name
+        self.status = status
     }
     
     static func == (lhs: Player, rhs: Player) -> Bool {

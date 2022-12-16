@@ -11,9 +11,15 @@ class Board {
     
     var singlePlayer : Bool = true
     var gameIsFinnished : Bool = false
-    let playerOfDoom = Player(symbol: "_", term: 0, name: "Doom")
-    let playerA = Player(symbol: "O", term: 1, name: "A")
-    let playerB = Player(symbol: "X", term: 4, name: "B" )
+    
+    let statusPlay = "Play"
+    let statusWin = "win"
+    let statusLoose = "Loose"
+    
+    let playerOfDoom : Player
+    let playerA : Player
+    let playerB : Player
+
     var winningPlayer : Player?
     var turnPlayerA: Bool = true
     var turnPlayerB: Bool = false
@@ -41,6 +47,11 @@ class Board {
     var cellR0C0, cellR0C1, cellR0C2, cellR1C0, cellR1C1, cellR1C2, cellR2C0, cellR2C1, cellR2C2 : Cell
     
     init() {
+        
+        playerOfDoom = Player(symbol: "_", term: 0, name: "playerOfDoom", status: statusPlay)
+        playerA = Player(symbol: "O", term: 1, name: "playerA", status: statusPlay)
+        playerB = Player(symbol: "X", term: 4, name: "playerB", status: statusPlay)
+        
         self.cellR0C0 = Cell(name: "cellR0C0", player: playerOfDoom)
         self.cellR0C1 = Cell(name: "cellR0C1", player: playerOfDoom)
         self.cellR0C2 = Cell(name: "cellR0C2", player: playerOfDoom)
@@ -276,17 +287,27 @@ class Board {
             
                     if (sumRow0  == 3 || sumRow1 == 3 || sumRow2 == 3 || sumColumn0 == 3 || sumColumn1 == 3 || sumColumn2 == 3 || sumDiagonal1 == 3 || sumDiagonal2 == 3) {
                         winningPlayer = playerA
+                        playerA.status = statusWin
+                        playerB.status = statusLoose
+                        playerOfDoom.status = statusLoose
+
                         playerAPoints += 1
                         doWinningStuff(player: winningPlayer ?? playerOfDoom)
                         print("PlayerA wins!")
                     } else if (sumRow0  == 12 || sumRow1 == 12 || sumRow2 == 12 || sumColumn0 == 12 || sumColumn1 == 12 || sumColumn2 == 12 || sumDiagonal1 == 12 || sumDiagonal2 == 12) {
                         winningPlayer = playerB
+                        playerA.status = statusLoose
+                        playerB.status = statusWin
+                        playerOfDoom.status = statusLoose
                         playerBPoints += 1
                         doWinningStuff(player: winningPlayer ?? playerOfDoom)
                         print("PlayerB wins!")
                     }
                     else if ((playerACells.count > 2 && playerBCells.count > 2) && ((sumRow0  == 00 || sumRow1 == 00 || sumRow2 == 00 || sumColumn0 == 00 || sumColumn1 == 00 || sumColumn2 == 00 || sumDiagonal1 == 00 || sumDiagonal2 == 00))) {
                         winningPlayer = playerOfDoom
+                        playerA.status = statusLoose
+                        playerB.status = statusLoose
+                        playerOfDoom.status = statusWin
                         playerAPoints = 0
                         playerBPoints = 0
                         doWinningStuff(player: winningPlayer ?? playerOfDoom)
@@ -337,6 +358,9 @@ class Board {
             
             allCells = [row0[0], row0[1], row0[2], row1[0], row1[1], row1[2], row2[0], row2[1], row2[2]]
 
+            playerA.status = statusPlay
+            playerB.status = statusPlay
+            playerOfDoom.status = statusPlay
             
             curentPlayerTurn = playerA
             assignPlayerToCell = playerOfDoom
@@ -348,5 +372,4 @@ class Board {
             
         }
     }
-    
-    }
+}
