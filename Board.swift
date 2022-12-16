@@ -36,6 +36,7 @@ class Board {
     var playerOfDoomCells : [Cell]
     var playerACells : [Cell]
     var playerBCells : [Cell]
+    let cellGroups : [[Cell]]
     
     var cellR0C0, cellR0C1, cellR0C2, cellR1C0, cellR1C1, cellR1C2, cellR2C0, cellR2C1, cellR2C2 : Cell
     
@@ -58,6 +59,8 @@ class Board {
         column2 = [row0[2], row1[2], row2[2]]
         diagonal1 = [row0[0], row1[1], row2[2]]
         diagonal2 = [row0[2], row1[1], row2[0]]
+        
+        cellGroups = [row0, row1, row2, column0, column1, column2, diagonal1, diagonal2]
         
         allCells = [row0[0], row0[1], row0[2], row1[0], row1[1], row1[2], row2[0], row2[1], row2[2]]
         
@@ -213,17 +216,6 @@ class Board {
             default:
                 assignPlayerToCell = playerOfDoom
             }
-            print()
-            print()
-            print()
-            for cell in playerOfDoomCells {
-                print("Doom ",cell.player.term)}
-            print()
-            for cell in playerACells {
-                print("A ",cell.player.term)}
-            print()
-            for cell in playerBCells {
-                print("B ",cell.player.term)}
             return assignPlayerToCell
         }
     
