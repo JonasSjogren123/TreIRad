@@ -9,7 +9,7 @@ import Foundation
 
 class Board {
     
-    var singlePlayer : Bool = false
+    var singlePlayer : Bool = true
     var gameIsFinnished : Bool = false
     let playerOfDoom = Player(symbol: "_", term: 0, name: "Doom")
     let playerA = Player(symbol: "O", term: 1, name: "A")
@@ -61,8 +61,6 @@ class Board {
         diagonal1 = [row0[0], row1[1], row2[2]]
         diagonal2 = [row0[2], row1[1], row2[0]]
         
-        //allCells = [cellR0C0, cellR0C1, cellR0C2, cellR1C0, cellR1C1, cellR1C2, cellR2C0, cellR2C1, cellR2C2]
-        
         allCells = [row0[0], row0[1], row0[2], row1[0], row1[1], row1[2], row2[0], row2[1], row2[2]]
         
         completeBoard = [row0, row1, row2]
@@ -70,10 +68,6 @@ class Board {
         playerACells = []
         playerBCells = []
         playerOfDoomCells = [cellR0C0, cellR0C1, cellR0C2, cellR1C0, cellR1C1, cellR1C2, cellR2C0, cellR2C1, cellR2C2]
-        
-        for cell in 0...playerOfDoomCells.count-1 {
-            print("playerOfDoomCells ", playerOfDoomCells[cell].name)
-        }
         
         curentPlayerTurn = playerA
         assignPlayerToCell = playerOfDoom
@@ -133,17 +127,10 @@ class Board {
                 curentCell = cellR2C2
                 cellNumber = 9
             }
-            //curentCell = cell
         } else if singlePlayer == true && turnPlayerB == true {
-            print("Call autoMovePlayerB")
             autoMovePlayerB()
             curentCell = autoMovePlayerB()
             cell = autoMovePlayerB()
-            print("Try to move playerB")
-        }
-        
-        for cell in allCells {
-            print(cell.name, cell.player.name, cell.player.term, cell.self, "!!!!!!!!!!!!!!!!!!!!!!")
         }
         saveCompleteBoard()
         checkWhoWins()
@@ -151,33 +138,18 @@ class Board {
     }
     
     func autoMovePlayerB() -> Cell {
-        print()
-        print()
-        print()
-        print()
-        print("autoMovePlayerB")
         var cell : Cell?
         var index = 0
         if turnPlayerB {
             if playerCountB < 3 {
                 index = Int.random(in: 0...((playerOfDoomCells.count)-1))
-                print("playerOfDoomCells index = ",index)
-                print("playerOfDoomCells.count = ",playerOfDoomCells.count)
                 gamePlay(playerOfDoomCells[index])
-                print("playerOfDoomCells index = ",index)
-                print("playerOfDoomCells.count", playerOfDoomCells.count)
                 if index >= playerOfDoomCells.count {index -= 1}
                 cell = playerOfDoomCells[index]
             } else if playerCountB > 2 {
                 index = Int.random(in: 0...(playerBCells.count-1))
-                print("playerBCells index = ",index)
-                print("playerBCells.count = ", playerBCells.count)
                 if index >= playerBCells.count {index -= 1}
-                print("playerBCells index = ",index)
                 gamePlay(playerBCells[index])
-                print("playerBCells index = ",index)
-                print("playerBCell.count = ",playerBCells.count)
-                print("Trying to perform cell = playerBCells[index ]Here playerBCells[index] index sometimes go out of range:")
                 if index >= playerBCells.count {index -= 1}
                 cell = playerBCells[index]
             }
@@ -186,62 +158,46 @@ class Board {
     }
         
         func gamePlay (_ cell : Cell) -> Player{
-            print("gamePlay")
-            print("playerBCells.count = ",playerBCells.count)
-            print("playerBCells.indices = ", playerBCells.indices)
-            print("playerOfDoomCells.count = ",playerOfDoomCells.count)
-            print("playerOfDoomCells.indices = ",playerOfDoomCells.indices)
-
             let cell = cell
             if cell.player.term == self.playerOfDoom.term {
                 if turnPlayerA && playerCountA < 3 {
                     cell.player = playerA
                     playerCountA += 1
-                    turnPlayerA = false
-                    turnPlayerB = true
                     self.curentPlayerTurn = playerB
                     playerACells.append(cell)
                     playerOfDoomCells = playerOfDoomCells.filter { $0 != cell }
+                    turnPlayerA = false
+                    turnPlayerB = true
                 } else if turnPlayerB && playerCountB < 3 {
                     cell.player = playerB
                     playerCountB += 1
+                    self.curentPlayerTurn = playerA
+                    playerOfDoomCells = playerOfDoomCells.filter { $0 != cell }
                     turnPlayerA = true
                     turnPlayerB = false
-                    self.curentPlayerTurn = playerA
-                    print("ganePlaye turnPlayerB && playerBCountB < 3 ")
-                    print("playerBCells.count = ",playerBCells.count)
-                    print("playerBCells index = ",playerBCells.indices)
-                    playerBCells.append(cell)
-                    print("After playerBCells.append(cell)")
-                    print("playerBCells.count = ",playerBCells.count)
-                    print("playerBCells index = ",playerBCells.indices)
-                    playerOfDoomCells = playerOfDoomCells.filter { $0 != cell }
                 }
             } else if cell.player.term == self.playerA.term {
                 if (turnPlayerA == true) && playerCountA > 2 {
                     cell.player = playerOfDoom
                     playerCountA -= 1
-                    turnPlayerA = true
-                    turnPlayerB = false
                     self.curentPlayerTurn = playerA
                     playerACells = playerACells.filter { $0 != cell }
                     playerOfDoomCells.append(cell)
+                    turnPlayerA = true
+                    turnPlayerB = false
                 } else {}
             } else if cell.player.term == self.playerB.term {
                 if (turnPlayerB == true) && playerCountB > 2 {
                     cell.player = playerOfDoom
                     playerCountB -= 1
-                    turnPlayerA = false
-                    turnPlayerB = true
-                    print("ganePlaye turnPlayerB && playerBCountB > 2 ")
-                    print("playerBCells.count = ",playerBCells.count)
-                    print("playerBCells index = ",playerBCells.indices)
                     self.curentPlayerTurn = playerB
                     playerBCells = playerBCells.filter { $0 != cell }
                     print("After playerBCells = playerBCells.filter { $0 != cell }")
                     print("playerBCells.count = ",playerBCells.count)
                     print("playerBCells index = ",playerBCells.indices)
                     playerOfDoomCells.append(cell)
+                    turnPlayerA = false
+                    turnPlayerB = true
                 } else {}
             }
             switch cell.player.term {
