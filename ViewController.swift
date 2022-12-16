@@ -50,14 +50,14 @@ class ViewController: UIViewController {
     var colorPlayerNone = #colorLiteral(red: 0.1, green: 0.1, blue: 0.1,
                                         alpha: 1)
     var colorPlayerADim = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
-                                        alpha: 0.2)
-    var colorPlayerBDim = #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
-                                        alpha: 0.2)
+                                        alpha: 0.5)
+    var colorPlayerBDim = #colorLiteral(red: 0.8, green: 0.8, blue: 0.0,
+                                        alpha: 0.3)
     var colorPlayerAAccent = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
                                      alpha: 1)
     var colorPlayerBAccent =  #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
                                       alpha: 1)
-    var colorPlayerOfDoomAccent = #colorLiteral(red: 0.7, green: 0.1, blue: 0.3,
+    var colorPlayerOfDoomAccent = #colorLiteral(red: 1.0, green: 0.0, blue: 0.2,
                                         alpha: 1)
     
     var turnPlayerA: Bool = true
@@ -138,20 +138,6 @@ class ViewController: UIViewController {
     }
     
     func initializeCellViewColors() {
-        let colorBoardBackground = #colorLiteral(red: 0.0, green: 0.0, blue: 0.0,
-                                                 alpha: 0.1)
-        colorPlayerAPlay = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
-                                         alpha: 0.7)
-        colorPlayerBPlay =  #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
-                                          alpha: 0.7)
-        colorPlayerNone = #colorLiteral(red: 0.1, green: 0.1, blue: 0.1,
-                                            alpha: 1)
-        colorPlayerAAccent = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
-                                         alpha: 1)
-        colorPlayerBAccent =  #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
-                                          alpha: 1)
-        colorPlayerOfDoomAccent = #colorLiteral(red: 1.0, green: 0.0, blue: 0.0,
-                                            alpha: 1)
         playerAStatusView.backgroundColor = colorPlayerAPlay
         playerBStatusView.backgroundColor = colorPlayerBPlay
 
