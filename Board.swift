@@ -19,8 +19,6 @@ class Board {
     var turnPlayerB: Bool = false
     var curentPlayerTurn : Player
     var assignPlayerToCell : Player
-    var playerCountA = 0
-    var playerCountB = 0
     var playerAPoints = 0
     var playerBPoints = 0
     var curentCell : Cell?
@@ -141,12 +139,12 @@ class Board {
         var cell : Cell?
         var index = 0
         if turnPlayerB {
-            if playerCountB < 3 {
+            if playerBCells.count < 3 {
                 index = Int.random(in: 0...((playerOfDoomCells.count)-1))
                 gamePlay(playerOfDoomCells[index])
                 if index >= playerOfDoomCells.count {index -= 1}
                 cell = playerOfDoomCells[index]
-            } else if playerCountB > 2 {
+            } else if playerBCells.count > 2 {
                 index = Int.random(in: 0...(playerBCells.count-1))
                 if index >= playerBCells.count {index -= 1}
                 gamePlay(playerBCells[index])
@@ -159,38 +157,34 @@ class Board {
         
         func gamePlay (_ cell : Cell) -> Player{
             let cell = cell
-            if cell.player.term == self.playerOfDoom.term {
-                if turnPlayerA && playerCountA < 3 {
+            if cell.player == self.playerOfDoom {
+                if turnPlayerA && playerACells.count < 3 {
                     cell.player = playerA
-                    playerCountA += 1
-                    self.curentPlayerTurn = playerB
                     playerACells.append(cell)
                     playerOfDoomCells = playerOfDoomCells.filter { $0 != cell }
                     turnPlayerA = false
                     turnPlayerB = true
-                } else if turnPlayerB && playerCountB < 3 {
+                    self.curentPlayerTurn = playerB
+                } else if turnPlayerB && playerBCells.count < 3 {
                     cell.player = playerB
-                    playerCountB += 1
-                    self.curentPlayerTurn = playerA
+                    playerBCells.append(cell)
                     playerOfDoomCells = playerOfDoomCells.filter { $0 != cell }
                     turnPlayerA = true
                     turnPlayerB = false
-                }
-            } else if cell.player.term == self.playerA.term {
-                if (turnPlayerA == true) && playerCountA > 2 {
-                    cell.player = playerOfDoom
-                    playerCountA -= 1
                     self.curentPlayerTurn = playerA
+                }
+            } else if cell.player == self.playerA {
+                if (turnPlayerA == true) && playerACells.count > 2 {
+                    cell.player = playerOfDoom
                     playerACells = playerACells.filter { $0 != cell }
                     playerOfDoomCells.append(cell)
                     turnPlayerA = true
                     turnPlayerB = false
+                    self.curentPlayerTurn = playerA
                 } else {}
-            } else if cell.player.term == self.playerB.term {
-                if (turnPlayerB == true) && playerCountB > 2 {
+            } else if cell.player == self.playerB {
+                if (turnPlayerB == true) && playerBCells.count > 2 {
                     cell.player = playerOfDoom
-                    playerCountB -= 1
-                    self.curentPlayerTurn = playerB
                     playerBCells = playerBCells.filter { $0 != cell }
                     print("After playerBCells = playerBCells.filter { $0 != cell }")
                     print("playerBCells.count = ",playerBCells.count)
@@ -198,12 +192,23 @@ class Board {
                     playerOfDoomCells.append(cell)
                     turnPlayerA = false
                     turnPlayerB = true
+                    self.curentPlayerTurn = playerB
                 } else {}
             }
-            switch cell.player.term {
-            case 1:
+            print()
+            print()
+            print("function gamePlay cell.player = ",cell.player.term, cell.player.name)
+            print("playerACells.count = ", playerACells.count)
+            playerACells.forEach {print($0)}
+            print("playerBCells.count = ",playerBCells.count)
+            playerBCells.forEach {print($0)}
+            print("playerOfDoomCells.count = ",playerOfDoomCells.count)
+            playerOfDoomCells.forEach {print($0)}
+
+            switch cell.player {
+            case playerA:
                 assignPlayerToCell = playerA
-            case 4:
+            case playerB:
                 assignPlayerToCell = playerB
             default:
                 assignPlayerToCell = playerOfDoom
@@ -274,7 +279,7 @@ class Board {
             print("  ",termsRow2, " ", sumRow2)
             print()
             print(sumDiagonal2,",", sumColumn0,",", sumColumn1,",", sumColumn2, " ", sumDiagonal1)
-            print("playerCountA = ",playerCountA, ", ", "playerCountB = ", playerCountB)
+            print("playerCountA = ",playerACells.count, ", ", "playerCountB = ", playerBCells.count)
 
             
                     if (sumRow0  == 3 || sumRow1 == 3 || sumRow2 == 3 || sumColumn0 == 3 || sumColumn1 == 3 || sumColumn2 == 3 || sumDiagonal1 == 3 || sumDiagonal2 == 3) {
@@ -288,7 +293,7 @@ class Board {
                         doWinningStuff(player: winningPlayer ?? playerOfDoom)
                         print("PlayerB wins!")
                     }
-                    else if ((playerCountA > 2 && playerCountB > 2) && ((sumRow0  == 00 || sumRow1 == 00 || sumRow2 == 00 || sumColumn0 == 00 || sumColumn1 == 00 || sumColumn2 == 00 || sumDiagonal1 == 00 || sumDiagonal2 == 00))) {
+                    else if ((playerACells.count > 2 && playerBCells.count > 2) && ((sumRow0  == 00 || sumRow1 == 00 || sumRow2 == 00 || sumColumn0 == 00 || sumColumn1 == 00 || sumColumn2 == 00 || sumDiagonal1 == 00 || sumDiagonal2 == 00))) {
                         winningPlayer = playerOfDoom
                         playerAPoints = 0
                         playerBPoints = 0
@@ -346,8 +351,6 @@ class Board {
             winningPlayer = nil
             
             turnPlayerA = true
-            playerCountA = 0
-            playerCountB = 0
             
             gameIsFinnished = false
             

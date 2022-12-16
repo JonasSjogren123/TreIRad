@@ -123,39 +123,6 @@ class ViewController: UIViewController {
         }
     }
     
-    /*func assignCellViewColor(_ assignCellView : () -> UIButton?) {
-        
-        switch board.assignPlayerToCell {
-        case board.playerA:
-            if board.winningPlayer == board.playerA{
-                self.colorPlayerA = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
-                                                  alpha: 1)
-                for cellView in playerACellViews {
-                    
-                }
-            } else {
-                self.colorPlayerA = #colorLiteral(red: 0.0, green: 0.0, blue: 1.0,
-                                                  alpha: 0.5)}
-            self.curentCellView?.backgroundColor = colorPlayerA
-        case board.playerB:
-            if board.winningPlayer == board.playerB{
-                self.colorPlayerB = #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
-                                                  alpha: 1)
-            } else {
-                self.colorPlayerB = #colorLiteral(red: 1.0, green: 1.0, blue: 0.0,
-                                                  alpha: 0.5)}
-            self.curentCellView?.backgroundColor = colorPlayerB
-        default:
-            if board.winningPlayer == board.playerOfDoom{
-            self.colorPlayerOfDoomAccent = #colorLiteral(red: 1.0, green: 0.0, blue: 0.0,
-                                              alpha: 0.1)}
-            else {
-                self.curentCellView?.backgroundColor = colorPlayerNone
-                
-            }
-        }
-    }*/
-    
     func assignCellView() -> UIButton? {
         
         let curentCell = self.board.curentCell
@@ -201,9 +168,6 @@ class ViewController: UIViewController {
                 board.makeAMove(place: sender.tag)
                 self.cellNumber = sender.tag
                 assignCellView()
-                /*assignCellViewColor({
-                    assignCellView()
-                })*/
         }
         updateViewContollerToBoard()
     }
