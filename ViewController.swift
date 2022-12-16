@@ -9,8 +9,8 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var viewBoardBackground: UIImageView!
+    @IBOutlet weak var gameMode: UIButton!
     
-    @IBOutlet weak var gameMode: UILabel!
     @IBOutlet weak var playerAStatusView: UIButton!
     @IBOutlet weak var playerBStatusView: UIButton!
     
@@ -34,8 +34,8 @@ class ViewController: UIViewController {
     var curentPlayer : Player?
     var cell : Cell?
     var curentCell : Cell?
-    var playerAPoints : String = "00"
-    var playerBPoints : String = "00"
+    var playerAPoints : String = "0"
+    var playerBPoints : String = "0"
     
     let board = Board()
         
@@ -76,8 +76,11 @@ class ViewController: UIViewController {
         
         curentPlayer = self.board.playerA
         cellColor = colorPlayerNone
+        gameMode.backgroundColor = colorPlayerBPlay
         playerAStatusView.backgroundColor = colorPlayerAAccent
         playerBStatusView.backgroundColor = colorPlayerBPlay
+        playerAStatusView.setTitle(String(board.playerAPoints), for: .normal)
+        playerBStatusView.setTitle(String(board.playerBPoints), for: .normal)
         
         cellViews = [cellViewR0C0, cellViewR0C1, cellViewR0C2, cellViewR1C0, cellViewR1C1, cellViewR1C2, cellViewR2C0, cellViewR2C1, cellViewR2C2]
         
@@ -89,6 +92,21 @@ class ViewController: UIViewController {
     }
     
     func updateViewContollerToBoard() {
+        if !board.gameIsFinnished {
+            if board.turnPlayerA {
+                playerAStatusView.backgroundColor = colorPlayerAAccent
+                playerBStatusView.backgroundColor = colorPlayerBPlay
+            } else {
+                playerAStatusView.backgroundColor = colorPlayerAPlay
+                playerBStatusView.backgroundColor = colorPlayerBAccent
+            }
+        } else {
+            playerAStatusView.backgroundColor = colorPlayerAPlay
+            playerBStatusView.backgroundColor = colorPlayerBPlay
+        }
+        playerAStatusView.setTitle(String(board.playerAPoints), for: .normal)
+        playerBStatusView.setTitle(String(board.playerBPoints), for: .normal)
+
         switch board.winningPlayer {
         case nil:
             for (index, cell) in board.allCells.enumerated() {
@@ -138,7 +156,7 @@ class ViewController: UIViewController {
     }
     
     func initializeCellViewColors() {
-        playerAStatusView.backgroundColor = colorPlayerAPlay
+        playerAStatusView.backgroundColor = colorPlayerAAccent
         playerBStatusView.backgroundColor = colorPlayerBPlay
 
         for cellView in cellViews {
@@ -176,9 +194,9 @@ class ViewController: UIViewController {
     func handleExtraOutlets() {
         if board.singlePlayer == true {
             board.singlePlayer = false
-            gameMode.isHidden = true
+            gameMode.backgroundColor = colorPlayerBDim
         } else {board.singlePlayer = true
-            gameMode.isHidden = false
+            gameMode.backgroundColor = colorPlayerBPlay
         }
     }
     
@@ -194,6 +212,12 @@ class ViewController: UIViewController {
         }
         updateViewContollerToBoard()
     }
+    
+    @IBAction func gameModeButton(_ sender: UIButton!) {
+        handleExtraOutlets()
+
+    }
+    
     
     @IBAction func playerAStatusButton(_ sender: UIButton) {
         

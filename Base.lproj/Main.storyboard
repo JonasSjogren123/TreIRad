@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -125,23 +124,17 @@
                                     <action selector="gameButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SrM-PY-LNe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Do-ij-qbx">
-                                <rect key="frame" x="20" y="54" width="50" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Do-ij-qbx">
+                                <rect key="frame" x="20" y="54" width="72" height="50"/>
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="fDi-ME-CLB"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="k7z-EF-FeC"/>
                                 </constraints>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Button">
-                                            <attributes>
-                                                <font key="NSFont" metaFont="system" size="15"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <state key="normal" title="Button">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large" weight="bold">
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                     </preferredSymbolConfiguration>
                                 </state>
                                 <connections>
@@ -149,32 +142,34 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OoF-IW-dKU">
-                                <rect key="frame" x="340" y="54" width="54" height="50"/>
+                                <rect key="frame" x="322" y="54" width="72" height="50"/>
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="qtB-MX-ZPE"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="rky-VZ-R5V"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="Button">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large" weight="bold">
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                     </preferredSymbolConfiguration>
                                 </state>
                                 <connections>
                                     <action selector="playerBStatusButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iGZ-ng-SMQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WTU-nh-Qm7">
-                                <rect key="frame" x="197" y="69" width="20" height="20"/>
-                                <color key="backgroundColor" name="AccentColor"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pty-cm-dLJ">
+                                <rect key="frame" x="182" y="54" width="50" height="50"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="Nzm-dZ-WqZ"/>
-                                    <constraint firstAttribute="width" constant="20" id="nrz-uW-wxt"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="496-NZ-qkY"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="NZL-tW-jA0"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <connections>
+                                    <action selector="gameModeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="r88-ph-C8r"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -184,7 +179,7 @@
                             <constraint firstItem="eaJ-HV-0Br" firstAttribute="leading" secondItem="pUa-1P-Xvd" secondAttribute="leading" id="4hx-Ss-KvP"/>
                             <constraint firstItem="2Do-ij-qbx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="A8Y-VQ-i3k"/>
                             <constraint firstItem="28y-d3-A5b" firstAttribute="top" secondItem="pcj-dU-Nu0" secondAttribute="bottom" constant="10" id="E1X-wz-48m" userLabel="Cell ViewR2C0.top = Cell ViewR1C0.bottom + 5"/>
-                            <constraint firstItem="WTU-nh-Qm7" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="G7d-vD-ueY"/>
+                            <constraint firstItem="Pty-cm-dLJ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="FPq-cJ-ll7"/>
                             <constraint firstItem="OoF-IW-dKU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Ga5-tt-QVq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OoF-IW-dKU" secondAttribute="trailing" constant="20" id="JE0-eT-7qE"/>
                             <constraint firstItem="AfB-Ij-kfz" firstAttribute="leading" secondItem="VpR-ow-aVl" secondAttribute="trailing" constant="10" id="JrR-tT-f4M" userLabel="Cell ViewR0C1.leading = Cell ViewR0C0.trailing + 5"/>
@@ -192,9 +187,9 @@
                             <constraint firstItem="eaJ-HV-0Br" firstAttribute="leading" secondItem="28y-d3-A5b" secondAttribute="trailing" constant="10" id="RHl-Op-C32" userLabel="Cell ViewR2C1.leading = Cell ViewR2C0.trailing + 5"/>
                             <constraint firstItem="2Do-ij-qbx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="W0U-x6-pgR"/>
                             <constraint firstItem="m1J-sy-oDz" firstAttribute="leading" secondItem="eaJ-HV-0Br" secondAttribute="trailing" constant="10" id="aSl-Oh-8cS" userLabel="Cell ViewR2C2.leading = Cell ViewR2C1.trailing + 5"/>
-                            <constraint firstItem="WTU-nh-Qm7" firstAttribute="centerY" secondItem="2Do-ij-qbx" secondAttribute="centerY" id="jq2-ja-EQN"/>
                             <constraint firstItem="eaJ-HV-0Br" firstAttribute="leading" secondItem="pUa-1P-Xvd" secondAttribute="leading" id="kbN-pW-oxf"/>
                             <constraint firstItem="3uK-jf-WjG" firstAttribute="leading" secondItem="AfB-Ij-kfz" secondAttribute="trailing" constant="10" id="mDh-53-SCf" userLabel="Cell ViewR0C2.leading = Cell ViewR0C1.trailing + 5"/>
+                            <constraint firstItem="Pty-cm-dLJ" firstAttribute="top" secondItem="2Do-ij-qbx" secondAttribute="top" id="nVB-mA-CaV"/>
                             <constraint firstItem="pcj-dU-Nu0" firstAttribute="top" secondItem="VpR-ow-aVl" secondAttribute="bottom" constant="10" id="qfy-8V-6Dv" userLabel="Cell ViewR1C0.top = Cell ViewR0C0.bottom + 5"/>
                             <constraint firstItem="yXq-vh-o9V" firstAttribute="top" secondItem="3uK-jf-WjG" secondAttribute="bottom" constant="10" id="r0z-kS-JCr" userLabel="Cell ViewR1C2.top = Cell ViewR0C2.bottom + 5"/>
                             <constraint firstItem="yXq-vh-o9V" firstAttribute="leading" secondItem="pUa-1P-Xvd" secondAttribute="trailing" constant="10" id="rwc-lA-iXW" userLabel="Cell ViewR1C2.leading = Cell ViewR1C1.trailing + 5"/>
@@ -214,7 +209,7 @@
                         <outlet property="cellViewR2C0" destination="28y-d3-A5b" id="B4u-br-y9k"/>
                         <outlet property="cellViewR2C1" destination="eaJ-HV-0Br" id="JMT-18-Clz"/>
                         <outlet property="cellViewR2C2" destination="m1J-sy-oDz" id="uBS-Pv-Tvd"/>
-                        <outlet property="gameMode" destination="WTU-nh-Qm7" id="xHu-gw-jyI"/>
+                        <outlet property="gameMode" destination="Pty-cm-dLJ" id="SN2-Ph-Zf4"/>
                         <outlet property="playerAStatusView" destination="2Do-ij-qbx" id="f4x-RY-ep6"/>
                         <outlet property="playerBStatusView" destination="OoF-IW-dKU" id="4l2-Qf-Lmr"/>
                     </connections>
@@ -240,9 +235,6 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
